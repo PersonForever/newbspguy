@@ -15,6 +15,7 @@
 #include "Sprite.h"
 #include <GL/glew.h>
 #include <GLFW/glfw3.h>
+#include <imgui.h>
 
 class EditBspCommand;
 
@@ -309,19 +310,7 @@ public:
 	std::vector<EditBspCommand*> redoHistory;
 	LumpState undoLumpState;
 
-	struct DelayEntUndo
-	{
-		std::string description;
-		int entIdx;
-		Entity* ent;
-		DelayEntUndo(std::string desc, int entId, Entity* entity) : description(std::move(desc))
-		{
-			entIdx = entId;
-			ent = entity;
-		}
-	};
-
-	bool delayEntUndo = false;
+	ImGuiID delayEntUndo = 0;
 	std::string delayEntUndoDesc = "undo";
 
 	void pushUndoState(const std::string& actionDesc, unsigned int targets);

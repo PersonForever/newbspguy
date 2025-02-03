@@ -2691,12 +2691,6 @@ void BspRenderer::render(bool modelVertsDraw, int clipnodeHull)
 	renderOffset = mapOffset.flip();
 	localCameraOrigin = cameraOrigin - mapOffset;
 
-	if (delayEntUndo)
-	{
-		delayEntUndo = false;
-		pushUndoState(delayEntUndoDesc, FL_ENTITIES);
-	}
-
 	g_app->matmodel.loadIdentity();
 	g_app->matmodel.translate(renderOffset.x, renderOffset.y, renderOffset.z);
 	g_app->colorShader->updateMatrixes();
@@ -3874,7 +3868,9 @@ void BspRenderer::clearDrawCache()
 
 void BspRenderer::pushEntityUndoStateDelay(const std::string& desc)
 {
-	delayEntUndo = true;
+	delayEntUndo = ImGui::GetActiveID();
+	if (delayEntUndo == 0)
+		delayEntUndo = 1;
 	delayEntUndoDesc = desc;
 }
 

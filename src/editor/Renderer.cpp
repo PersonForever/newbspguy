@@ -871,6 +871,12 @@ void Renderer::renderLoop()
 					continue;
 				}
 
+				if (mapRenderers[i]->delayEntUndo > 0 && ImGui::GetActiveID() != mapRenderers[i]->delayEntUndo)
+				{
+					mapRenderers[i]->delayEntUndo = 0;
+					mapRenderers[i]->pushUndoState(mapRenderers[i]->delayEntUndoDesc, FL_ENTITIES);
+				}
+
 				mapRenderers[i]->clearDrawCache();
 
 				Bsp* curMap = mapRenderers[i]->map;

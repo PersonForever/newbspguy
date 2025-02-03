@@ -556,6 +556,8 @@ del "$(TargetDir)bspguy.cfg_bak"</Command>
       <SectionAlignment>
       </SectionAlignment>
       <ImageHasSafeExceptionHandlers>false</ImageHasSafeExceptionHandlers>
+      <Profile>
+      </Profile>
     </Link>
     <ProjectReference>
       <LinkLibraryDependencies>
